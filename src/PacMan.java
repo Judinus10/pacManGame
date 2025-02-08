@@ -11,6 +11,17 @@ public class PacMan extends JPanel {
     private int boardWidth = colCount * tileSize;
     private int boardHeight = rowCount * tileSize;
 
+    private Image wallImage;
+    private Image blueGhostImage;
+    private Image orangeGhostImage;
+    private Image pinkGhostImage;
+    private Image redGhostimage;
+
+    private Image pacmanUp;
+    private Image pacmanDown;
+    private Image pacmanRight;
+    private Image pacmanLeft;
+
     PacMan() {
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setBackground(Color.BLACK);
