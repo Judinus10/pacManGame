@@ -5,6 +5,28 @@ import java.util.Random;
 import javax.swing.*;
 
 public class PacMan extends JPanel {
+
+    class Block{
+        int x;
+        int y;
+        int width;
+        int height;
+        Image image;
+
+        int startx;
+        int startY;
+
+        Block(Image image, int x, int y, int height, int width){
+            this.image=image;
+            this.x=x;
+            this.y=y;
+            this.height=height;
+            this.width=width;
+            this.startx=x;
+            this.startY=y;
+        }
+
+    }
     private int rowCount = 21;
     private int colCount = 19;
     private int tileSize = 32;
