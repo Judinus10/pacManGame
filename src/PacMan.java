@@ -144,6 +144,9 @@ public class PacMan extends JPanel {
             g.drawImage(ghost.image, ghost.x, ghost.y, ghost.width, ghost.height, null);
         }
 
-        
+        for (Block wall : walls) {
+            g.drawImage(wall.image, wall.x, wall.y, wall.width, wall.height, null);
+        }
+
     }
 }
