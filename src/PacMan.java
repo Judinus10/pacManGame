@@ -200,8 +200,8 @@ public class PacMan extends JPanel implements ActionListener, KeyListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
-        
+        move();
+        repaint(); 
     }
 
     @Override
