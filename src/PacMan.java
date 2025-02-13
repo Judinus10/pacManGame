@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 import javax.swing.*;
 
-public class PacMan extends JPanel implements ActionListener{
+public class PacMan extends JPanel implements ActionListener, KeyListener{
 
     class Block {
         int x;
@@ -81,6 +81,8 @@ public class PacMan extends JPanel implements ActionListener{
     PacMan() {
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setBackground(Color.BLACK);
+        addKeyListener(this);
+        setFocusable(true);
 
         // load images
         wallImage = new ImageIcon(getClass().getResource("./assets/wall.png")).getImage();
@@ -97,7 +99,7 @@ public class PacMan extends JPanel implements ActionListener{
         loadMap();
         gameLoop=new Timer(50, this);
         gameLoop.start();
-        
+
         System.out.println(walls.size());
         System.out.println(foods.size());
         System.out.println(ghosts.size());
@@ -168,5 +170,16 @@ public class PacMan extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         repaint();
         
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("KeyEvent: "+e.getKeyCode());
     }
 }
