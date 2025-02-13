@@ -15,6 +15,9 @@ public class PacMan extends JPanel implements ActionListener, KeyListener{
 
         int startx;
         int startY;
+        char direction = 'u';
+        int velocityX = 0;
+        int velocityY = 0;
 
         Block(Image image, int x, int y, int height, int width) {
             this.image = image;
@@ -24,6 +27,30 @@ public class PacMan extends JPanel implements ActionListener, KeyListener{
             this.width = width;
             this.startx = x;
             this.startY = y;
+        }
+
+        void updateDirection(char direction){
+            this.direction=direction;
+            updateVelocity();
+        }
+
+        void updateVelocity() {
+            if (this.direction == 'U') {
+                this.velocityX = 0;
+                this.velocityY = -tileSize/4;
+            }
+            else if (this.direction == 'D') {
+                this.velocityX = 0;
+                this.velocityY = tileSize/4;
+            }
+            else if (this.direction == 'L') {
+                this.velocityX = -tileSize/4;
+                this.velocityY = 0;
+            }
+            else if (this.direction == 'R') {
+                this.velocityX = tileSize/4;
+                this.velocityY = 0;
+            }
         }
 
     }
@@ -181,5 +208,17 @@ public class PacMan extends JPanel implements ActionListener, KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println("KeyEvent: "+e.getKeyCode());
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            pacman.updateDirection('U');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            pacman.updateDirection('D');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            pacman.updateDirection('L');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            pacman.updateDirection('R');
+        }
     }
 }
