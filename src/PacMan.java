@@ -225,6 +225,11 @@ public class PacMan extends JPanel implements ActionListener, KeyListener{
         }
 
         for (Block ghost : ghosts) {
+
+            if (ghost.y == tileSize*9 && ghost.direction != 'U' && ghost.direction != 'D') {
+                ghost.updateDirection('U');
+            } 
+            
             ghost.x += ghost.velocityX;
             ghost.y += ghost.velocityY;
             for (Block wall : walls) {
