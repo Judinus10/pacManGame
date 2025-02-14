@@ -30,8 +30,19 @@ public class PacMan extends JPanel implements ActionListener, KeyListener{
         }
 
         void updateDirection(char direction){
+            char preDirection = this.direction;
             this.direction=direction;
             updateVelocity();
+            this.x += this.velocityX;
+            this.y += this.velocityY;
+            for (Block wall : walls) {
+                if (collision(this, wall)) {
+                    this.x -= this.velocityX;
+                    this.y -= this.velocityY;
+                    this.direction = preDirection;
+                    updateVelocity();
+                }
+            }
         }
 
         void updateVelocity() {
