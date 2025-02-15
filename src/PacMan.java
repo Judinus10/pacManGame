@@ -13,7 +13,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
         int height;
         Image image;
 
-        int startx;
+        int startX;
         int startY;
         char direction = 'u';
         int velocityX = 0;
@@ -25,7 +25,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
             this.y = y;
             this.height = height;
             this.width = width;
-            this.startx = x;
+            this.startX = x;
             this.startY = y;
         }
 
@@ -59,6 +59,11 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
                 this.velocityX = tileSize / 4;
                 this.velocityY = 0;
             }
+        }
+
+        void reset() {
+            this.x = this.startX;
+            this.y = this.startY;
         }
 
     }
@@ -233,6 +238,14 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
         }
 
         for (Block ghost : ghosts) {
+            if (collision(ghost, pacman)) {
+                lives -= 1;
+                if (lives == 0) {
+                    gameOver = true;
+                    return;
+                }
+                resetPositions();
+            }
 
             if (ghost.y == tileSize * 9 && ghost.direction != 'U' && ghost.direction != 'D') {
                 ghost.updateDirection('U');
@@ -268,6 +281,17 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
                 a.y + a.height > b.y;
     }
 
+    public void resetPositions() {
+        pacman.reset();
+        pacman.velocityX = 0;
+        pacman.velocityY = 0;
+        for (Block ghost : ghosts) {
+            ghost.reset();
+            char newDirection = directions[random.nextInt(4)];
+            ghost.updateDirection(newDirection);
+        }
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         move();
